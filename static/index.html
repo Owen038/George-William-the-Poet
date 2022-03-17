@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Poetry Generator (2022)</title>
+  <meta name="description" content="Poetry Generator (2022)">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.10.0/dist/css/uikit.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body class="uk-height-viewport uk-flex uk-flex-center uk-flex-middle">
+  <div id="app" class="uk-container">
+    <article>
+      <h1>AI Poetry Generator</h1>
+  
+      <p style="margin-bottom: -1em;"> George William 1800th C Philosopher and Poet. </p>
+      <p> Disclaimer: The following poetry is for personal, inspiration purposes only. Other uses are disregarded by this service. </p>
+    
+    </article>
+    
+    <form @submit.prevent="generateText" >
+      
+      <textarea placeholder="I write poetry because..."  v-model="text" class="uk-input uk-width-large uk-height-medium" ></textarea>
+      <input type="submit" value="Generate Poem" class="uk-button uk-button-primary uk-border-rounded" >
+    
+    </form>
+
+    <div>
+      {{ poem }}
+    </div>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        text: null,
+        poem: null
+      },
+      methods: {
+        setPoem( response ) {
+          console.log( response )
+          this.poem = response.text
+        },
+        generateText() {
+          fetch(`http://localhost:3000/api/?text=${this.text}`)
+            .then(
+              response => {
+                response.json().then(this.setPoem);
+              }
+            )
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>
