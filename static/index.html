@@ -11,20 +11,25 @@
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 </head>
-<body class="uk-height-viewport uk-flex uk-flex-center uk-flex-middle">
+
+<body class="uk-height-viewport uk-flex uk-flex-center uk-flex-middle" style="background-color:steelblue;"> </body>
   <div id="app" class="uk-container">
     <article>
-      <h1>AI Poetry Generator</h1>
+      <h1 style="color:goldenrod;"> George William the Poetry Agent </h1>
+      
+      
   
-      <p style="margin-bottom: -1em;"> George William 1800th C Philosopher and Poet. </p>
-      <p> Disclaimer: The following poetry is for personal, inspiration purposes only. Other uses are disregarded by this service. </p>
+      <p style="margin-bottom: -1em; color:mintcream;" class="a"> George William 1800th C Philosopher and Poet. </p>
+      <p style="margin-bottom: -1em; color:mintcream;"> Disclaimer: The following poetry is for personal, inspiration purposes only. Other uses are disregarded by this service. </p>
+      <p style="color:gold;"> You could sugest a poem with the following words: Sunshine, Love, Happy and Sad. </p>
+
     
     </article>
     
     <form @submit.prevent="generateText" >
       
-      <textarea placeholder="I write poetry because..."  v-model="text" class="uk-input uk-width-large uk-height-medium" ></textarea>
-      <input type="submit" value="Generate Poem" class="uk-button uk-button-primary uk-border-rounded" >
+      <textarea style="background-color: snow;"  placeholder="I write poetry because..."  v-model="text" class="uk-input uk-width-large uk-height-medium" ></textarea>
+      <input type="submit" value="Generate Poem" style="background-color: goldenrod;" class="uk-button uk-button-primary uk-border-rounded" >
     
     </form>
 
