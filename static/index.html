@@ -29,7 +29,7 @@
     </form>
 
     <div>
-      {{ poem }}
+      {{ answer }}
     </div>
   </div>
 
@@ -37,6 +37,7 @@
     var app = new Vue({
       el: '#app',
       data: {
+        answer: null,
         text: null,
         poem: null
       },
@@ -44,6 +45,7 @@
         setPoem( response ) {
           console.log( response )
           this.poem = response.text
+          this.answer = response.answer
         },
         generateText() {
           fetch(`http://localhost:3000/api/?text=${this.text}`)

@@ -18,19 +18,35 @@ app.get('/api/', (req, res) => {
   const lang = 'en'
 
   // the model from nlpcloud you want to
-  const model = 'gpt-j'
+  const model = 'fast-gpt-j'
   const client = new NLPCloudClient(
     model, // the model you chose
     your_token, // the api token you copie,
     is_gpu
   )
 
-  client.generation(request, null, 50).then(function (response) {
+/*   client.generation(request, null, 50).then(function (response) {
 
     const text = response.data.generated_text
 
     res.json({
       text: text
+    })
+
+  }).catch(function (err) {
+
+    console.error(err.response.status);
+    console.error(err.response.data.detail);
+
+  }); */
+
+  client.question(request).then(function (response) {
+    const answer = response.data.answer
+    const text = response.data.generated_text
+
+    res.json({
+      text: text,
+      answer: answer
     })
 
   }).catch(function (err) {
