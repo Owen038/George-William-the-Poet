@@ -1,5 +1,7 @@
 html, body {
-    height: 100vh
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
 }
 #p1 {background-color: #ff0000;}   /* red */
 #p2 {background-color: #00ff00;}   /* green */
@@ -9,10 +11,8 @@ html, body {
     
 }
 
-  p.a {
-    font-family: alegreya-sans, sans-serif;
-    font-style: normal;
-    font-weight: 200;
+  h1.a {
+    font-family: Quintessential, sans;
 
 }
 
@@ -21,4 +21,10 @@ p { text-decoration-color: rgb(113, 201, 125);
 
   .uk-text-primary {
       color:aliceblue!important;
+  }
+
+  .uk-container {
+      width:80%;
+      margin: auto;
+      height: 200vh;
   }
