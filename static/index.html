@@ -6,11 +6,14 @@
   <meta name="description" content="Poetry Generator (2022)">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.10.0/dist/css/uikit.min.css" />
+  <link rel="stylesheet" href="./assets/styles.css" />
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 </head>
+
+
 
 
 <body class="uk-height-viewport uk-flex uk-flex-center uk-flex-middle" style="background-color:black;"> </body>
@@ -21,7 +24,8 @@
       
   
       <p style="margin-bottom: -1em; color:mintcream;" class="a"> George William 1800th C Philosopher and Poet. </p>
-      <p style="margin-bottom: -1em; color:mintcream;"> Disclaimer: The following poetry is for personal, inspiration purposes only. Other uses are disregarded by this service. </p>
+      <p style="margin-bottom: -1em; color:crimson; font-family: alegreya-sans, sans-serif;"> Disclaimer: </p>
+      <p style="color:mintcream;"> The following poetry is for personal, inspiration purposes only. Other uses are disregarded by this service. </p>
       <p style="color:gold;"> You could sugest a poem with the following words: Sunshine, Love, Happy and Sad. </p>
 
     
@@ -34,7 +38,7 @@
     
     </form>
 
-    <div>
+    <div class="uk-text-primary">
       {{ poem }}
     </div>
   </div>
