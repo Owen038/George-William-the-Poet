@@ -16,6 +16,13 @@ html, body {
 
 }
 
+p.b {
+    font-family: Roboto, slab;
+    font-weight: 100;
+
+}
+
+
 p { text-decoration-color: rgb(113, 201, 125);
   }
 
