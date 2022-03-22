@@ -20,5 +20,5 @@ p { text-decoration-color: rgb(113, 201, 125);
   }
 
   .uk-text-primary {
-      color:aliceblue
+      color:aliceblue!important;
   }
