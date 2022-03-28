@@ -61,7 +61,7 @@
       methods: {
         setPoem( response ) {
           console.log( response )
-          this.poem = response.text
+          this.text = response.text
         },
         generateText() {
           fetch(`http://localhost:3000/api/?text=${this.text}`)

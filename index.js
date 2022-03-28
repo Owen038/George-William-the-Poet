@@ -25,7 +25,7 @@ app.get('/api/', (req, res) => {
     is_gpu
   )
 
-  client.generation(request, null, 50).then(function (response) {
+  client.generation(request, null, 140).then(function (response) {
 
     const text = response.data.generated_text
 
