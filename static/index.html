@@ -26,24 +26,29 @@
 <body> </body> 
   <div id="app" class="uk-container">
     <header class="">
-      <h1 style=" margin-top: 1em; font-size:60px; color:goldenrod;" class="a"> George William the poëtry agent </h1>
+      <h1 class="a"> George William the poëtry agent </h1>
       <p style=" color:aliceblue;" class="b"> George William 1800th C Philosopher and Poët. He visited Greece 1843C. </p>
     </header>
     <div class="uk-grid uk-flex uk-flex-between">
       <div class="uk-width-expand">
         <div class="uk-card uk-card-default uk-card-small uk-width-1-1">
           <form @submit.prevent="generateText" class="uk-width-1-1">
-            <textarea style="font-family: roboto; background-color: snow; color: black;" placeholder=" Insert the first rhymes of your poëm..."  v-model="text" class="uk-input uk-width-1-1 uk-height-medium" :disabled="loading"></textarea>
+            <textarea style="font-family: roboto; background-color: snow; color: black;" placeholder=" Insert the first rhymes of your poëm..."  v-model="text" class="uk-input uk-width-1-1 uk-height-medium" ></textarea>
             <!-- <input type="submit" value="Generate Poem" style="margin-left: 20px; background-color: goldenrod;" class="uk-button uk-button-primary uk-border-rounded" > -->
           </form>
           <div class="uk-card-footer" v-if="agree">
-            <ul class="uk-iconnav ">
-              <li v-for="(action, actionKey) in actions">
-                <a @click="$root[ actionKey ]">
-                  <img :src="'/assets/noun-'+action.icon+'.svg'" width="30" height="30" uk-svg :alt="actionKey">
-                </a>
-              </li>
-            </ul>
+            <div v-if="text.trim().length === 0"> Start writing a poem or select a starter from the right panel. </div>
+            <div v-else class="uk-flex uk-flex-between">
+              <button @click="generate" style="margin-left: 20px; background-color: goldenrod;" class="uk-button uk-button-primary uk-border-rounded" >Generate Poem</button>
+              <ul  class="uk-iconnav ">
+                <li v-for="(action, actionKey) in actions">
+                  <a @click="$root[actionKey]" class="uk-icon-button">
+                    <img :src="'/assets/noun-'+action.icon+'.svg'" width="30" height="30" uk-svg :alt="actionKey">
+                  </a>
+                </li>
+              </ul>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -69,7 +74,7 @@
     var app = new Vue({
       el: '#app',
       data: {
-        text: null,
+        text: '',
         poem: null,
         agree: false,
         loading: false,
@@ -82,17 +87,18 @@
         }
       },
       methods: {
-        'setText': function( response ) {
-          console.log( response )
+        setText( response ) {
+          console.log('response', response.text )
           this.text = response.text
+          this.poem = response.text
         },
-        'generate': function() {
+        generate() {
           this.loading = true
           fetch(`http://localhost:3000/api/?text=${this.text}`)
             .then(
               response => {
                 this.loading = false
-                response.json().then(this['setText']);
+                response.json().then(this.setText);
               }
             )
         },

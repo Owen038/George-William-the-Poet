@@ -1,6 +1,11 @@
+@import url('https://fonts.adobe.com/fonts/quiche-display#details-section+quiche-display-thin');
+
 html, body { 
     height: 100vh;
     width: 100vw;
+    font-family: quiche-display, sans-serif;
+    font-style: normal;
+    font-weight: 100;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),url('https://images.unsplash.com/photo-1530841377377-3ff06c0ca713?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
 }
 
@@ -14,7 +19,8 @@ html, body {
 }
 
   h1.a {
-    font-family: Quintessential, sans;
+    font-family: quiche-display;
+    margin-top: 1em; color:goldenrod;
 
 }
 
