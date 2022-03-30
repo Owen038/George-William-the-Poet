@@ -23,30 +23,44 @@
   <![endif]-->
 </head>
 
-<body class="uk-height-viewport uk-flex uk-flex-center uk-flex-middle" style="background-color:black;"> </body> 
+<body> </body> 
   <div id="app" class="uk-container">
-    <article>
+    <header class="">
       <h1 style=" margin-top: 1em; font-size:60px; color:goldenrod;" class="a"> George William the poëtry agent </h1>
-      
-    
-
       <p style=" color:aliceblue;" class="b"> George William 1800th C Philosopher and Poët. He visited Greece 1843C. </p>
-      <p style="margin-bottom: -1em; font-size: small; color:red; font-family: alegreya-sans, sans-serif;" class="b"> Disclaimer: </p>
-      <p style="font-size: smaller; color:aliceblue;" class="b"> The following poëtry is for personal, inspiration purposes only. Other uses are disregarded by this service. </p>
-      <p style="margin-bottom: -1em; color:gold;" class="b"> You could suggest a poëm with the following words: Sun, Love, Rain and Happy. </p>
-      <p style="font-size: small; color:aliceblue;" class="b"> In the future this generator will generate full poëm's with any word you would like.</p>
-      
-    </article>
-    
-    <form @submit.prevent="generateText" >
-      
-      <textarea style="margin-bottom: 3em; font-family: roboto; background-color: snow; color: black;" placeholder=" Insert the first rhymes of your poëm..."  v-model="text" class="uk-input uk-width-large uk-height-medium" ></textarea>
-      <input type="submit" value="Generate Poem" style="margin-left: 20px; background-color: goldenrod;" class="uk-button uk-button-primary uk-border-rounded" >
-    
-    </form>
-
-    <div class="uk-text-primary" class="b">
-      {{ poem }}
+    </header>
+    <div class="uk-grid uk-flex uk-flex-between">
+      <div class="uk-width-expand">
+        <div class="uk-card uk-card-default uk-card-small uk-width-1-1">
+          <form @submit.prevent="generateText" class="uk-width-1-1">
+            <textarea style="font-family: roboto; background-color: snow; color: black;" placeholder=" Insert the first rhymes of your poëm..."  v-model="text" class="uk-input uk-width-1-1 uk-height-medium" :disabled="loading"></textarea>
+            <!-- <input type="submit" value="Generate Poem" style="margin-left: 20px; background-color: goldenrod;" class="uk-button uk-button-primary uk-border-rounded" > -->
+          </form>
+          <div class="uk-card-footer" v-if="agree">
+            <ul class="uk-iconnav ">
+              <li v-for="(action, actionKey) in actions">
+                <a @click="$root[ actionKey ]">
+                  <img :src="'/assets/noun-'+action.icon+'.svg'" width="30" height="30" uk-svg :alt="actionKey">
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div  class="uk-width-large">
+        <div class="uk-text-primary">
+          <p style="margin-bottom: -1em; color:gold;" class="b"> You could suggest a poëm with the following words: Sun, Love, Rain and Happy. </p>
+        </div>
+      </div>
+    </div>
+    <div class="uk-position-bottom uk-card uk-card-default uk-card-small uk-card-body uk-flex uk-flex-between" v-show="!agree">
+      <article class="uk-text-large">
+        <div style="color:red; " class="uk-margin-small-bottom "> Disclaimer: </div>
+        <p style="font-size: smaller;" class="uk-text-small"> The following poëtry is for personal, inspiration purposes only. Other uses are disregarded by this service. </p>
+      </article>
+      <button class="uk-button uk-button-primary uk-button-small" @click="agree=true">
+        I agree to these terms.
+      </button>
     </div>
   </div>
 
@@ -56,21 +70,32 @@
       el: '#app',
       data: {
         text: null,
-        poem: null
+        poem: null,
+        agree: false,
+        loading: false,
+        actions: {
+          'generate': { icon: 'gear-103873' },
+          'reset': { icon: 'back-1940187' },
+          'savet': { icon: 'save-as-1226968' },
+          'copy': { icon: 'copy-4651767' },
+          'share': { icon: 'share-4712993' },
+        }
       },
       methods: {
-        setPoem( response ) {
+        'setText': function( response ) {
           console.log( response )
           this.text = response.text
         },
-        generateText() {
+        'generate': function() {
+          this.loading = true
           fetch(`http://localhost:3000/api/?text=${this.text}`)
             .then(
               response => {
-                response.json().then(this.setPoem);
+                this.loading = false
+                response.json().then(this['setText']);
               }
             )
-        }
+        },
       }
     })
   </script>
